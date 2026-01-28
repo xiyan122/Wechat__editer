@@ -46,6 +46,22 @@ npm run build
 npm run preview
 ```
 
+## 在线预览 / 快速部署（GitHub Pages）
+
+仓库已配置 Pages 自动部署工作流：推送到 `main` 后会自动构建并发布到 GitHub Pages。
+
+1. 在 GitHub 仓库设置里启用 Pages（Source 选 GitHub Actions）
+2. 等待 Actions 跑完 `Deploy to GitHub Pages`
+3. 通过 Actions 输出的 `page_url` 访问在线预览
+
+## 在 Issue 里一键下载构建包（ZIP）
+
+为了让任何人都能快速拿到可用构建包，仓库提供了 Issue 触发打包：
+
+1. 打开 Issues → New issue
+2. 选择「一键下载构建包（ZIP）」模板并提交
+3. 等待 Actions 完成后，会在该 Issue 评论区给出 ZIP 下载链接（artifact）
+
 ## 推荐工作流（更贴近公众号后台）
 
 1. 写作 → 套模板/插组件 → 右侧预览确认

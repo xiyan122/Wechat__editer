@@ -53,3 +53,7 @@ labels:
   - name: "wechat: export"
     color: "0e8a16"
     description: "导出相关"
+
+  - name: "request: bundle"
+    color: "1d76db"
+    description: "请求生成可下载的构建 ZIP（Actions artifact）"

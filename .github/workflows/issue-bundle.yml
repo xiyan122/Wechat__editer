@@ -1,0 +1,83 @@
+name: Issue Bundle Download
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+
+jobs:
+  bundle:
+    # Run when the issue has the request label (either on open with template, or when labeled later)
+    if: |
+      (github.event_name == 'issues' && github.event.action == 'opened' && contains(join(github.event.issue.labels.*.name, ','), 'request: bundle')) ||
+      (github.event_name == 'issues' && github.event.action == 'labeled' && github.event.label.name == 'request: bundle')
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Create ZIP
+        run: |
+          zip -r wechatedit-dist.zip dist
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wechatedit-dist-zip
+          path: wechatedit-dist.zip
+          retention-days: 30
+
+      - name: Comment download link
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.payload.issue.number;
+            const run_id = context.runId;
+
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner,
+              repo,
+              run_id,
+            });
+
+            const artifact = artifacts.data.artifacts.find(a => a.name === 'wechatedit-dist-zip');
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${run_id}`;
+            const artifactUrl = artifact
+              ? `${context.serverUrl}/${owner}/${repo}/actions/runs/${run_id}/artifacts/${artifact.id}`
+              : runUrl;
+
+            const body = [
+              '已生成可下载构建包（ZIP）。',
+              '',
+              `- 直接下载：${artifactUrl}`,
+              `- 运行详情：${runUrl}`,
+              '',
+              '说明：这是 Actions artifact（默认需要登录 GitHub；且会在一段时间后过期）。',
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
+              body,
+            });

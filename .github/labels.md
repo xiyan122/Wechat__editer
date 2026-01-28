@@ -24,6 +24,10 @@
 - `scope: export` — 导出/内联（`src/wechat/wechatStyles.ts` / `src/wechat/inlineWeChat.ts`）
 - `scope: editor` — 编辑器 UI/交互（`src/wechat/WeChatEditor.tsx`）
 
+## 请求（request）
+
+- `request: bundle` — 请求 Actions 生成可下载构建 ZIP（Issue 驱动）
+
 ## 状态/流程
 
 - `good first issue` — 适合新贡献者
