@@ -8,6 +8,8 @@ export type BuiltInWeChatThemeId =
   | 'ink'
   | 'royal'
 
+export type WeChatCssVarName = `--wechat-${string}`
+
 export type WeChatThemeId = BuiltInWeChatThemeId | `custom:${string}`
 
 export type WeChatCustomTheme = {

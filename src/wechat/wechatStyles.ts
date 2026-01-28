@@ -1,7 +1,11 @@
 import { getBuiltInThemeCss } from './themes/builtInThemes'
-import type { BuiltInWeChatThemeId, WeChatCustomTheme, WeChatThemeId } from './themes/themeTypes'
+import type {
+  BuiltInWeChatThemeId,
+  WeChatCustomTheme,
+  WeChatThemeId,
+} from './themes/themeTypes'
 
-export type { BuiltInWeChatThemeId, WeChatCustomTheme, WeChatThemeId } from './themes/themeTypes'
+export type { BuiltInWeChatThemeId, WeChatCssVarName, WeChatCustomTheme, WeChatThemeId } from './themes/themeTypes'
 
 function normalizeVarName(name: string): string {
   const trimmed = name.trim()

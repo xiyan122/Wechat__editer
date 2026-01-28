@@ -102,6 +102,8 @@ npm run build
 - [ ] 导出 CSS 与“复制内联 HTML（更稳）”表现合理
 - [ ] PR 内容聚焦（尽量只改一个分区）
 
+说明：仓库已配置 GitHub Actions，PR 会自动跑 `npm ci` / `npm run lint` / `npm run build`。
+
 ## 版本与发布（最小策略）
 
 目标：让后续“主题/组件/套版”的更新在 GitHub 上更容易追踪和回滚。
