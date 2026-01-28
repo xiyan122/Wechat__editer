@@ -31,7 +31,7 @@
 
 ## 快速开始
 
-环境要求：Node.js 18+（推荐 LTS）
+环境要求：Node.js 20+（推荐 LTS；仓库 CI 使用 Node 24）
 
 ```bash
 npm install
