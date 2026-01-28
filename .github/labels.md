@@ -1,6 +1,13 @@
 # GitHub Labels 建议
 
-GitHub labels 需要在仓库设置里创建（或用 GitHub CLI / Actions 自动化）。这里给出一套“够用但不复杂”的最小建议，方便后续追踪主题/组件/套版/导出相关改动。
+本仓库已提供 GitHub Actions 自动同步 labels：
+
+- 配置文件：`.github/labels.yml`
+- 工作流：`.github/workflows/labels.yml`
+
+默认不会删除你手动创建的旧 label（`skip-delete: true`），只做新增/更新。
+
+下面这份清单也可作为语义参考：
 
 ## 类型（type）
 
